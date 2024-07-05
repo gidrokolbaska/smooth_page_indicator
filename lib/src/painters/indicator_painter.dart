@@ -16,18 +16,23 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
 
   /// The Radius of all dots
   final Radius dotRadius;
+  final bool expand;
 
   /// Default constructor
   BasicIndicatorPainter(
     double offset,
     this.count,
     this._effect,
+    this.expand,
   )   : dotRadius = Radius.circular(_effect.radius),
         dotPaint = Paint()
           ..color = _effect.dotColor
           ..style = _effect.paintStyle
           ..strokeWidth = _effect.strokeWidth,
-        super(offset);
+        super(
+          offset,
+          expand,
+        );
 
   /// The distance between dot lefts
   double get distance => _effect.dotWidth + _effect.spacing;
@@ -91,13 +96,17 @@ abstract class BasicIndicatorPainter extends IndicatorPainter {
 abstract class IndicatorPainter extends CustomPainter {
   /// The raw offset from the [PageController].page
   final double offset;
+  final bool expand;
 
   /// Default constructor
-  const IndicatorPainter(this.offset);
+  const IndicatorPainter(
+    this.offset,
+    this.expand,
+  );
 
   @override
   bool shouldRepaint(IndicatorPainter oldDelegate) {
     /// only repaint if the offset changes
-    return oldDelegate.offset != offset;
+    return oldDelegate.offset != offset || oldDelegate.expand != expand;
   }
 }

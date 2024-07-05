@@ -55,7 +55,10 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
         );
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  ) {
     /// Add the scaled dot width to our size calculation
     var width = (dotWidth + spacing) * (min(count, maxVisibleDots));
     if (fixedCenter && count <= maxVisibleDots) {
@@ -89,7 +92,11 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
   }
 
   @override
-  BasicIndicatorPainter buildPainter(int count, double offset) {
+  BasicIndicatorPainter buildPainter(
+    int count,
+    double offset,
+    bool expand,
+  ) {
     if (fixedCenter) {
       assert(
         offset.ceil() < count,
@@ -99,12 +106,14 @@ class ScrollingDotsEffect extends BasicIndicatorEffect {
         count: count,
         offset: offset,
         effect: this,
+        expand: expand,
       );
     } else {
       return ScrollingDotsPainter(
         count: count,
         offset: offset,
         effect: this,
+        expand: expand,
       );
     }
   }

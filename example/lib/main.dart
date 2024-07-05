@@ -70,15 +70,15 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.black54),
                 ),
               ),
-              SmoothPageIndicator(
-                controller: controller,
-                count: pages.length,
-                effect: const WormEffect(
-                  dotHeight: 16,
-                  dotWidth: 16,
-                  type: WormType.thinUnderground,
-                ),
-              ),
+              // SmoothPageIndicator(
+              //   controller: controller,
+              //   count: pages.length,
+              //   effect: const WormEffect(
+              //     dotHeight: 16,
+              //     dotWidth: 16,
+              //     type: WormType.thinUnderground,
+              //   ),
+              // ),
               //
               // Padding(
               //   padding: const EdgeInsets.only(top: 16, bottom: 8),
@@ -87,18 +87,19 @@ class _HomePageState extends State<HomePage> {
               //     style: TextStyle(color: Colors.black54),
               //   ),
               // ),
-              // Container(
-              //   child: SmoothPageIndicator(
-              //     controller: controller,
-              //     count: pages.length,
-              //     effect: JumpingDotEffect(
-              //       dotHeight: 16,
-              //       dotWidth: 16,
-              //       jumpScale: .7,
-              //       verticalOffset: 15,
-              //     ),
-              //   ),
-              // ),
+              Container(
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: pages.length,
+                  effect: JumpingDotEffect(
+                    dotHeight: 16,
+                    dotWidth: 16,
+                    jumpScale: .7,
+                    verticalOffset: 15,
+                  ),
+                  canvasSize: MediaQuery.sizeOf(context),
+                ),
+              ),
               // Padding(
               //   padding: const EdgeInsets.only(top: 16, bottom: 12),
               //   child: Text(
@@ -125,48 +126,49 @@ class _HomePageState extends State<HomePage> {
               //     style: TextStyle(color: Colors.black54),
               //   ),
               // ),
-              // Container(
-              //   // color: Colors.red.withOpacity(.4),
-              //   child: SmoothPageIndicator(
-              //     controller: controller,
-              //     count: pages.length,
-              //     effect: CustomizableEffect(
-              //       activeDotDecoration: DotDecoration(
-              //         width: 32,
-              //         height: 12,
-              //         color: Colors.indigo,
-              //         rotationAngle: 180,
-              //         verticalOffset: -10,
-              //         borderRadius: BorderRadius.circular(24),
-              //         // dotBorder: DotBorder(
-              //         //   padding: 2,
-              //         //   width: 2,
-              //         //   color: Colors.indigo,
-              //         // ),
-              //       ),
-              //       dotDecoration: DotDecoration(
-              //         width: 24,
-              //         height: 12,
-              //         color: Colors.grey,
-              //         // dotBorder: DotBorder(
-              //         //   padding: 2,
-              //         //   width: 2,
-              //         //   color: Colors.grey,
-              //         // ),
-              //         // borderRadius: BorderRadius.only(
-              //         //     topLeft: Radius.circular(2),
-              //         //     topRight: Radius.circular(16),
-              //         //     bottomLeft: Radius.circular(16),
-              //         //     bottomRight: Radius.circular(2)),
-              //         borderRadius: BorderRadius.circular(16),
-              //         verticalOffset: 0,
-              //       ),
-              //       spacing: 6.0,
-              //       // activeColorOverride: (i) => colors[i],
-              //       inActiveColorOverride: (i) => colors[i],
-              //     ),
-              //   ),
-              // ),
+              Container(
+                // color: Colors.red.withOpacity(.4),
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: pages.length,
+                  canvasSize: MediaQuery.sizeOf(context),
+                  effect: CustomizableEffect(
+                    activeDotDecoration: DotDecoration(
+                      width: 32,
+                      height: 12,
+                      color: Colors.indigo,
+                      // rotationAngle: 180,
+                      // verticalOffset: -10,
+                      borderRadius: BorderRadius.circular(24),
+                      // dotBorder: DotBorder(
+                      //   padding: 2,
+                      //   width: 2,
+                      //   color: Colors.indigo,
+                      // ),
+                    ),
+                    dotDecoration: DotDecoration(
+                      width: 24,
+                      height: 12,
+                      color: Colors.grey,
+                      // dotBorder: DotBorder(
+                      //   padding: 2,
+                      //   width: 2,
+                      //   color: Colors.grey,
+                      // ),
+                      // borderRadius: BorderRadius.only(
+                      //     topLeft: Radius.circular(2),
+                      //     topRight: Radius.circular(16),
+                      //     bottomLeft: Radius.circular(16),
+                      //     bottomRight: Radius.circular(2)),
+                      borderRadius: BorderRadius.circular(16),
+                      verticalOffset: 0,
+                    ),
+                    spacing: 6.0,
+                    // activeColorOverride: (i) => colors[i],
+                    inActiveColorOverride: (i) => colors[i], expand: true,
+                  ),
+                ),
+              ),
               // const SizedBox(height: 32.0),
             ],
           ),

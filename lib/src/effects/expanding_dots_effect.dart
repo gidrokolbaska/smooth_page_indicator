@@ -34,7 +34,10 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  ) {
     /// Add the expanded dot width to our size calculation
     return Size(
         ((dotWidth + spacing) * (count - 1)) + (expansionFactor * dotWidth),
@@ -42,8 +45,13 @@ class ExpandingDotsEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return ExpandingDotsPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool expand) {
+    return ExpandingDotsPainter(
+      count: count,
+      offset: offset,
+      effect: this,
+      expand: expand,
+    );
   }
 
   @override

@@ -14,13 +14,20 @@ import 'indicator_painter.dart';
 class TransitionPainter extends BasicIndicatorPainter {
   /// The painting configuration
   final ColorTransitionEffect effect;
+  final bool expand;
 
   /// Default constructor
   TransitionPainter({
     required this.effect,
     required int count,
     required double offset,
-  }) : super(offset, count, effect);
+    required this.expand,
+  }) : super(
+          offset,
+          count,
+          effect,
+          expand,
+        );
 
   @override
   void paint(Canvas canvas, Size size) {

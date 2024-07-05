@@ -18,6 +18,7 @@ class SmoothPageIndicator extends StatefulWidget {
 
   /// Holds effect configuration to be used in the [BasicIndicatorPainter]
   final IndicatorEffect effect;
+  final Size canvasSize;
 
   /// Layout direction vertical || horizontal
   ///
@@ -43,6 +44,7 @@ class SmoothPageIndicator extends StatefulWidget {
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
+    required this.canvasSize,
     this.effect = const WormEffect(),
   }) : super(key: key);
 
@@ -65,10 +67,14 @@ mixin _SizeAndRotationCalculatorMixin {
 
   int get count;
 
+  Size get canvasSize;
   IndicatorEffect get effect;
 
   void updateSizeAndRotation() {
-    size = effect.calculateSize(count);
+    size = effect.calculateSize(
+      count,
+      canvasSize,
+    );
 
     /// if textDirection is not provided use the nearest directionality up the widgets tree;
     final isRTL = (textDirection ?? _getDirectionality()) == TextDirection.rtl;
@@ -136,6 +142,9 @@ class _SmoothPageIndicatorState extends State<SmoothPageIndicator>
 
   @override
   TextDirection? get textDirection => widget.textDirection;
+
+  @override
+  Size get canvasSize => widget.canvasSize;
 }
 
 /// Draws dot-ish representation of pages by
@@ -181,7 +190,7 @@ class SmoothIndicator extends StatelessWidget {
         child: CustomPaint(
           size: size,
           // rebuild the painter with the new offset every time it updates
-          painter: effect.buildPainter(count, offset),
+          painter: effect.buildPainter(count, offset, effect.expand),
         ),
       ),
     );
@@ -214,6 +223,8 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
   /// The number of children in [PageView]
   final int count;
 
+  final Size canvasSize;
+
   /// If [textDirection] is [TextDirection.rtl], page direction will be flipped
   final TextDirection? textDirection;
 
@@ -225,6 +236,7 @@ class AnimatedSmoothIndicator extends ImplicitlyAnimatedWidget {
     Key? key,
     required this.activeIndex,
     required this.count,
+    required this.canvasSize,
     this.axisDirection = Axis.horizontal,
     this.textDirection,
     this.onDotClicked,
@@ -281,6 +293,8 @@ class _AnimatedSmoothIndicatorState
 
   @override
   TextDirection? get textDirection => widget.textDirection;
+  @override
+  Size get canvasSize => widget.canvasSize;
 
   @override
   Widget build(BuildContext context) {

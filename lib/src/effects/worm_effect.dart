@@ -35,8 +35,17 @@ class WormEffect extends BasicIndicatorEffect {
         );
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return WormPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(
+    int count,
+    double offset,
+    bool expand,
+  ) {
+    return WormPainter(
+      count: count,
+      offset: offset,
+      effect: this,
+      expand: expand,
+    );
   }
 }
 

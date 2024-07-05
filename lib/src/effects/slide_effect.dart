@@ -34,8 +34,13 @@ class SlideEffect extends BasicIndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return SlidePainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool expand) {
+    return SlidePainter(
+      count: count,
+      offset: offset,
+      effect: this,
+      expand: expand,
+    );
   }
 }
 

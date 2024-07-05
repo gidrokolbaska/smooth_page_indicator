@@ -19,7 +19,13 @@ class JumpingDotPainter extends BasicIndicatorPainter {
     required this.effect,
     required int count,
     required double offset,
-  }) : super(offset, count, effect);
+    required bool expand,
+  }) : super(
+          offset,
+          count,
+          effect,
+          expand,
+        );
 
   @override
   void paint(Canvas canvas, Size size) {

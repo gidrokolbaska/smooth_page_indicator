@@ -38,7 +38,7 @@ class JumpingDotEffect extends BasicIndicatorEffect {
             activeDotColor: activeDotColor);
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(int count, Size canvasSize) {
     return Size(
       dotWidth * count + (spacing * (count - 1)),
       max(dotHeight, dotHeight * jumpScale) + verticalOffset.abs(),
@@ -46,7 +46,12 @@ class JumpingDotEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return JumpingDotPainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool expand) {
+    return JumpingDotPainter(
+      count: count,
+      offset: offset,
+      effect: this,
+      expand: expand,
+    );
   }
 }

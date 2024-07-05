@@ -19,13 +19,15 @@ class CustomizablePainter extends IndicatorPainter {
 
   /// The number of pages
   final int count;
+  final bool expand;
 
   /// Default constructor
   CustomizablePainter({
     required double offset,
     required this.effect,
     required this.count,
-  }) : super(offset);
+    required this.expand,
+  }) : super(offset, expand);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -75,7 +77,9 @@ class CustomizablePainter extends IndicatorPainter {
       final rRect = RRect.fromLTRBAndCorners(
         xPos,
         yPos - decoration.height / 2,
-        xPos + decoration.width,
+        expand
+            ? xPos + (size.width / count) - effect.spacing
+            : xPos + decoration.width,
         yPos + decoration.height / 2,
         topLeft: decoration.borderRadius.topLeft,
         topRight: decoration.borderRadius.topRight,

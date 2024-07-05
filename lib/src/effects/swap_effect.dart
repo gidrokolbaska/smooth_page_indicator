@@ -35,7 +35,10 @@ class SwapEffect extends BasicIndicatorEffect {
         );
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  ) {
     var height = dotHeight;
     if (type == SwapType.zRotation) {
       height += height * .2;
@@ -46,12 +49,21 @@ class SwapEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
+  IndicatorPainter buildPainter(
+    int count,
+    double offset,
+    bool expand,
+  ) {
     assert(
       offset.ceil() < count,
       'SwapEffect does not support infinite looping.',
     );
-    return SwapPainter(count: count, offset: offset, effect: this);
+    return SwapPainter(
+      count: count,
+      offset: offset,
+      effect: this,
+      expand: expand,
+    );
   }
 }
 

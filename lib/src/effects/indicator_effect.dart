@@ -4,17 +4,27 @@ import 'package:smooth_page_indicator/src/painters/indicator_painter.dart';
 /// An Abstraction for a dot-indicator animation effect
 abstract class IndicatorEffect {
   /// Const constructor
-  const IndicatorEffect();
+  const IndicatorEffect({
+    this.expand = false,
+  });
+  final bool expand;
 
   /// Builds a new painter every time the page offset changes
-  IndicatorPainter buildPainter(int count, double offset);
+  IndicatorPainter buildPainter(
+    int count,
+    double offset,
+    bool expand,
+  );
 
   /// Calculates the size of canvas based on
   /// dots count, size and spacing
   ///
   /// Implementers can override this function
   /// to calculate their own size
-  Size calculateSize(int count);
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  );
 
   /// Returns the index of the section that contains [dx].
   ///
@@ -49,6 +59,7 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
 
   /// This is ignored if [paintStyle] is PaintStyle.fill
   final double strokeWidth;
+  final bool expand;
 
   /// Default construe
   const BasicIndicatorEffect({
@@ -60,13 +71,17 @@ abstract class BasicIndicatorEffect extends IndicatorEffect {
     required this.dotColor,
     required this.paintStyle,
     required this.activeDotColor,
+    this.expand = false,
   }) : assert(dotWidth >= 0 &&
             dotHeight >= 0 &&
             spacing >= 0 &&
             strokeWidth >= 0);
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  ) {
     return Size(dotWidth * count + (spacing * (count - 1)), dotHeight);
   }
 

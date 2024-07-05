@@ -42,7 +42,10 @@ class ScaleEffect extends BasicIndicatorEffect {
         );
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  ) {
     /// Add the scaled dot width to our size calculation
     final activeDotWidth = dotWidth * scale;
     final nonActiveCount = count - 1;
@@ -53,7 +56,12 @@ class ScaleEffect extends BasicIndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return ScalePainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool expand) {
+    return ScalePainter(
+      count: count,
+      offset: offset,
+      effect: this,
+      expand: expand,
+    );
   }
 }

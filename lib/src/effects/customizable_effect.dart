@@ -27,6 +27,7 @@ class CustomizableEffect extends IndicatorEffect {
 
   /// The space between two dots
   final double spacing;
+  final bool expand;
 
   /// Default constructor
   const CustomizableEffect({
@@ -35,16 +36,21 @@ class CustomizableEffect extends IndicatorEffect {
     this.activeColorOverride,
     this.spacing = 8,
     this.inActiveColorOverride,
+    required this.expand,
   });
 
   @override
-  Size calculateSize(int count) {
+  Size calculateSize(
+    int count,
+    Size canvasSize,
+  ) {
     final activeDotWidth =
         activeDotDecoration.width + activeDotDecoration.dotBorder.neededSpace;
     final dotWidth = dotDecoration.width + dotDecoration.dotBorder.neededSpace;
 
-    final maxWidth =
-        dotWidth * (count - 1) + (spacing * count) + activeDotWidth;
+    final maxWidth = expand
+        ? canvasSize.width
+        : dotWidth * (count - 1) + (spacing * count) + activeDotWidth;
 
     final offsetSpace =
         (dotDecoration.verticalOffset - activeDotDecoration.verticalOffset)
@@ -59,8 +65,9 @@ class CustomizableEffect extends IndicatorEffect {
   }
 
   @override
-  IndicatorPainter buildPainter(int count, double offset) {
-    return CustomizablePainter(count: count, offset: offset, effect: this);
+  IndicatorPainter buildPainter(int count, double offset, bool expand) {
+    return CustomizablePainter(
+        count: count, offset: offset, effect: this, expand: expand);
   }
 
   @override
